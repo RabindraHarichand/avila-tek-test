@@ -4,7 +4,7 @@ import { PaginationDto } from "../../shared/dtos/pagination.dto";
 import { CreateUserDto } from "../../domain/dtos/users/create-user.dto";
 import { UpdateUserDto } from "../../domain/dtos/users/update-user.dto";
 
-export class UsersController {
+export class UserController {
   constructor() {}
   private handleError = (error: unknown, res: Response) => {
     if (error instanceof CustomError)
