@@ -10,7 +10,8 @@ export class UpdateProductQuantityDto {
 
     if (typeof quantity !== "number")
       return ["quantity must be a valid number"];
-    if (!Number.isInteger(quantity)) return ["quantity must be a valid number"];
+    if (!Number.isInteger(quantity))
+      return ["quantity must be an integer number"];
     if (quantity < 0) return ["quantity must be a positive number"];
 
     return [undefined, new UpdateProductQuantityDto(quantity)];

@@ -9,6 +9,7 @@ export class UpdateProductDto {
   static create(props: { [key: string]: any }): [string?, UpdateProductDto?] {
     const { name, price, description, quantity } = props;
     if (!name) return ["Missing name"];
+    if (typeof name !== "string") return ["name must be a string"];
 
     if (!price) return ["Missing price"];
     if (isNaN(price)) return ["price must be a valid number"];
@@ -16,6 +17,8 @@ export class UpdateProductDto {
     if (price < 0) return ["price must be a positive number"];
 
     if (!description) return ["Missing description"];
+    if (typeof description !== "string")
+      return ["description must be a string"];
 
     if (!quantity) return ["Missing quantity"];
     if (isNaN(quantity)) return ["quantity must be a valid number"];
