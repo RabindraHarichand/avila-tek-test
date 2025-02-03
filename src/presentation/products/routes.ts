@@ -1,11 +1,18 @@
 import { Router } from "express";
+import { ProductDatasourceImpl } from "../../infrastructure/datasources/product.datasource.impl";
+import { ProductRepositoryImpl } from "../../infrastructure/repositories";
+import { ProductService } from "../services";
 import { ProductController } from "./controller";
 
 export class ProductRoutes {
   static get routes(): Router {
     const router = Router();
 
-    const productsController = new ProductController();
+    const datasource = new ProductDatasourceImpl();
+    const productRepository = new ProductRepositoryImpl(datasource);
+
+    const productsService = new ProductService(productRepository);
+    const productsController = new ProductController(productsService);
 
     router.get("/", productsController.getAllProducts);
     router.get("/:id", productsController.getProductById);
