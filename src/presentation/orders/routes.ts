@@ -1,15 +1,18 @@
 import { Router } from "express";
+import { OrderController } from "./controller";
 
 export class OrderRoutes {
   static get routes(): Router {
     const router = Router();
 
-    router.get("/", () => {});
-    router.get("/:id", () => {});
-    router.get("/user/:id", () => {});
-    router.post("/", () => {});
-    router.delete("/:id", () => {});
-    router.patch("/:id/status", () => {});
+    const ordersController = new OrderController();
+
+    router.get("/", ordersController.getAllOrders);
+    router.get("/:id", ordersController.getOrderById);
+    router.get("/user/:id", ordersController.getAllOrdersByUserId);
+    router.post("/", ordersController.createOrder);
+    router.delete("/:id", ordersController.deleteOrder);
+    router.patch("/:id/status", ordersController.updateOrderStatus);
 
     return router;
   }
