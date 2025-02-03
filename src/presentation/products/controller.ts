@@ -6,7 +6,7 @@ import { UpdateProductQuantityDto } from "../../domain/dtos/products/update-prod
 import { UpdateProductPriceDto } from "../../domain/dtos/products/update-product-price.dto";
 import { UpdateProductDto } from "../../domain/dtos/products/update-product.dto";
 
-export class ProductsController {
+export class ProductController {
   constructor() {}
   private handleError = (error: unknown, res: Response) => {
     if (error instanceof CustomError)
