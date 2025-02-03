@@ -1,4 +1,4 @@
-import { OrderStatus } from "../../../shared/types/order-status.type";
+import { OrderStatus } from "../../shared/types/order-status.type";
 import { OrderDetailEntity } from "./order-detail";
 
 export class OrderEntity {

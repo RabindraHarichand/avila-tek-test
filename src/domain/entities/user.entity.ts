@@ -1,4 +1,4 @@
-import { UserRole } from "../../../shared/types/user.type";
+import { UserRole } from "../../shared/types/user.type";
 
 export class UserEntity {
   constructor(

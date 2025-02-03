@@ -9,7 +9,6 @@ interface EnvVars {
   MAILER_SERVICE: string;
   MAILER_EMAIL: string;
   MAILER_SECRET_KEY: string;
-  WEBSERVICE_URL: string;
 }
 
 const envsSchema = joi
