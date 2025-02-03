@@ -7,6 +7,8 @@ import {
   UserRepositoryImpl,
   ProductRepositoryImpl,
 } from "../../infrastructure/repositories";
+import { AdminMiddleware } from "../middleware/admin.middleware";
+import { AuthMiddleware } from "../middleware/auth.middleware";
 import { OrderService } from "../services";
 import { OrderController } from "./controller";
 
@@ -31,12 +33,26 @@ export class OrderRoutes {
 
     const ordersController = new OrderController(ordersService);
 
-    router.get("/", ordersController.getAllOrders);
+    router.use(AuthMiddleware.validateJWT);
+
+    router.get(
+      "/",
+      AdminMiddleware.validateAdmin,
+      ordersController.getAllOrders
+    );
     router.get("/:id", ordersController.getOrderById);
     router.get("/user/:id", ordersController.getAllOrdersByUserId);
     router.post("/", ordersController.createOrder);
-    router.delete("/:id", ordersController.deleteOrder);
-    router.patch("/:id/status", ordersController.updateOrderStatus);
+    router.delete(
+      "/:id",
+      AdminMiddleware.validateAdmin,
+      ordersController.deleteOrder
+    );
+    router.patch(
+      "/:id/status",
+      AdminMiddleware.validateAdmin,
+      ordersController.updateOrderStatus
+    );
 
     return router;
   }

@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { ProductDatasourceImpl } from "../../infrastructure/datasources/product.datasource.impl";
 import { ProductRepositoryImpl } from "../../infrastructure/repositories";
+import { AdminMiddleware } from "../middleware/admin.middleware";
+import { AuthMiddleware } from "../middleware/auth.middleware";
 import { ProductService } from "../services";
 import { ProductController } from "./controller";
 
@@ -14,13 +16,35 @@ export class ProductRoutes {
     const productsService = new ProductService(productRepository);
     const productsController = new ProductController(productsService);
 
+    router.use(AuthMiddleware.validateJWT);
+
     router.get("/", productsController.getAllProducts);
     router.get("/:id", productsController.getProductById);
-    router.post("/", productsController.createProduct);
-    router.put("/:id", productsController.updateProduct);
-    router.delete("/:id", productsController.deleteProduct);
-    router.patch("/:id/quantity", productsController.updateProductQuantity);
-    router.patch("/:id/price", productsController.updateProductPrice);
+    router.post(
+      "/",
+      AdminMiddleware.validateAdmin,
+      productsController.createProduct
+    );
+    router.put(
+      "/:id",
+      AdminMiddleware.validateAdmin,
+      productsController.updateProduct
+    );
+    router.delete(
+      "/:id",
+      AdminMiddleware.validateAdmin,
+      productsController.deleteProduct
+    );
+    router.patch(
+      "/:id/quantity",
+      AdminMiddleware.validateAdmin,
+      productsController.updateProductQuantity
+    );
+    router.patch(
+      "/:id/price",
+      AdminMiddleware.validateAdmin,
+      productsController.updateProductPrice
+    );
 
     return router;
   }
