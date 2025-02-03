@@ -3,7 +3,7 @@ import * as joi from "joi";
 
 interface EnvVars {
   PORT: number;
-  JWT_SEED: string;
+  JWT_SECRET: string;
 
   SEND_EMAIL: boolean;
   MAILER_SERVICE: string;
@@ -15,7 +15,7 @@ interface EnvVars {
 const envsSchema = joi
   .object({
     PORT: joi.number().required(),
-    JWT_SEED: joi.string().required(),
+    JWT_SECRET: joi.string().required(),
 
     SEND_EMAIL: joi.boolean().required(),
     MAILER_SERVICE: joi.string().required(),
@@ -34,7 +34,7 @@ const envVars: EnvVars = value;
 
 export const envs = {
   port: envVars.PORT,
-  jwt_seed: envVars.JWT_SEED,
+  jwt_seed: envVars.JWT_SECRET,
 
   send_email: envVars.SEND_EMAIL,
   mailer_service: envVars.MAILER_SERVICE,
