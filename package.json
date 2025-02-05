@@ -10,7 +10,7 @@
     "test": "npm run prisma:migrate:test && jest",
     "test:watch": "npm run prisma:migrate:test && jest --watchAll --coverage",
     "test:coverage": "npm run prisma:migrate:test && jest --coverage",
-    "test:git": "jest --config ./jest.config.ts"
+    "test:git": "jest --config ./jest.config.ts  -- npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
