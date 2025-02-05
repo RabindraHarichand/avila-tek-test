@@ -12,21 +12,35 @@ env:
   MAILER_SECRET_KEY: ldhsyzllaxfsxmyh
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: npm install
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: npm install
       - run: npm run build
+
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 1234
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - run: npm install
       - run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: postgresql://postgres:1234@localhost:5432/test
       - run: npm run test:git
+        env:
+          DATABASE_URL: postgresql://postgres:1234@localhost:5432/test
