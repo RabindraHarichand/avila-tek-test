@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import compression from "compression";
+import { Server as HTTPServer } from "http";
 
 interface Options {
   port: number;
@@ -8,7 +9,7 @@ interface Options {
 
 export class Server {
   public readonly app = express();
-  private serverListener?: any;
+  private serverListener?: HTTPServer;
   private readonly port: number;
   private readonly routes: Router;
 
