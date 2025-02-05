@@ -1,0 +1,28 @@
+name: "Lint, Build and Test API"
+
+on: [push, pull_request]
+
+env:
+  PORT: 3000
+  DATABASE_URL: postgres://postgres:1234@localhost:5432/test
+  JWT_SEED: this_is_a_test_secret_value_for_jwt
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install
+      - run: npm run lint
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install
+      - run: npm run build
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install
+      - run: npm run test
