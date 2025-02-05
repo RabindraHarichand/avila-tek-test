@@ -53,7 +53,7 @@ export class OrderDatasourceImpl implements OrderDatasource {
       skip: (currentPage - 1) * perPage,
       take: perPage,
       where: {
-        id,
+        userId: id,
       },
       include: {
         OrderDetail: {
