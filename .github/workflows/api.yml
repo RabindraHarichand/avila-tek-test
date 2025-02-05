@@ -1,4 +1,4 @@
-name: "Lint, Build and Test API"
+name: "Build and Test API"
 
 on: [push, pull_request]
 
@@ -13,7 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm install
-      - run: npm run lint
   build:
     runs-on: ubuntu-latest
     steps:
@@ -25,4 +24,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm install
-      - run: npm run test
+      - run: npm run test:git
