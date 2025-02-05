@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 env:
   PORT: 3000
-  DATABASE_URL: postgres://postgres:1234@localhost:5432/test
+  DATABASE_URL: postgresql://postgres:1234@localhost:5432/test?schema=public
   JWT_SEED: this_is_a_test_secret_value_for_jwt
   SEND_EMAIL: true
   MAILER_SERVICE: gmail
